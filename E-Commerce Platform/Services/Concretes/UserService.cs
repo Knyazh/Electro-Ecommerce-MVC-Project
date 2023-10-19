@@ -33,19 +33,14 @@ namespace E_Commerce_Platform.Services.Concretes
                     throw new Exception("User is not authenticated");
                 }
 
-                var userIdCaim = _httpContextAccessor.HttpContext.User.Claims.FirstOrDefault(c => c.Type == "id");
+                var userIdCaim = _httpContextAccessor.HttpContext.User.Claims.FirstOrDefault(c => c.Type == "id") 
+                    ?? throw new Exception("User is not authenticated");
 
-                if (userIdCaim is null)
-                {
-                    throw new Exception("User is not authenticated");
-                }
+               
 
                 var userId = Convert.ToInt32(userIdCaim.Value);
-                var user = _eCommerceDBContext.Users.SingleOrDefault(u => u.Id == userId);
-                if (user is null)
-                {
-                    throw new Exception("User cant found");
-                }
+                var user = _eCommerceDBContext.Users.SingleOrDefault(u => u.Id == userId) 
+                    ?? throw new Exception("User cant found");
 
                 _currentUser = user;
                 return _currentUser;

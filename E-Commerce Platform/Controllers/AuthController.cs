@@ -11,13 +11,14 @@ namespace E_Commerce_Platform.Controllers
 
         private readonly IUserService userServide;
 
-        private readonly IEmailService _emailService;
-
         private readonly IUserActivationService _userActivationService;
-        public AuthController(ECommerceDBContext dbContext)
+        public AuthController(ECommerceDBContext dbContext, IUserService userServide, IUserActivationService userActivationService)
         {
             _dbContext = dbContext;
+            this.userServide = userServide;
+            _userActivationService = userActivationService;
         }
+
 
         #region Register
         [HttpGet]   

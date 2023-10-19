@@ -87,6 +87,7 @@ namespace E_Commerce_Platform.DataBase
         public DbSet<CategoryProduct> CategoryProducts { get; set; }
         public DbSet<ProductSize> ProductSizes { get; set; }
         public DbSet<ProductColor> ProductColors { get; set; }  
+        public DbSet<UserActivation> UserActivations { get; set; }
 
     }
 }

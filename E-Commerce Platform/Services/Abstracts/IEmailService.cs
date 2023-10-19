@@ -1,8 +1,10 @@
-﻿namespace E_Commerce_Platform.Services.Abstracts
+﻿using E_Commerce_Platform.Contracts;
+
+namespace E_Commerce_Platform.Services.Abstracts;
+
+public interface IEmailService
 {
-    public interface IEmailService
-    {
-        Task SendMessageAsync(string[] Recipients, string From, string Subject, string Body, string DisplayName, string Password, bool IsHtml);
-        Task SendMessageAsync(string Recipient, string From, string Subject, string Body, string DisplayName, string Password, bool IsHtml);
-    }
+    void SendEmail(string subject, string content, string receipent);
+    void SendEmail(string subject, string content, params string[] receipents);
+    void SendEmail(MessageDto messageDto);
 }
