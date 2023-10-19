@@ -21,7 +21,7 @@ public class UserActivationService : IUserActivationService
     }
 
 
-    public void CreateAndSendActivationToken( User user)
+    public void CreateAndSendActivationtoken( User user)
     {
         var activation = new UserActivation
         {
