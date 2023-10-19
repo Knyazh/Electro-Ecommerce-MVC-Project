@@ -1,4 +1,5 @@
-﻿using E_Commerce_Platform.DataBase;
+﻿using E_Commerce_Platform.Contracts;
+using E_Commerce_Platform.DataBase;
 using E_Commerce_Platform.DataBase.Models;
 using E_Commerce_Platform.Services.Abstracts;
 using System.Data;
@@ -83,7 +84,7 @@ namespace E_Commerce_Platform.Services.Concretes
 
         public bool IsCurrentUserAuthenticated()
         {
-            return _httpContextAccessor.HttpContext.User.Identity.IsAuthenticated;
+            return  _httpContextAccessor.HttpContext.User.Identity.IsAuthenticated;
         }
 
 
