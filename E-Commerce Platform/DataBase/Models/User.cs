@@ -18,7 +18,7 @@ namespace E_Commerce_Platform.DataBase.Models
         public DateTime LastUpdatedAt { get; set; }
         public DateTime DeletedAt { get; set; }
         public bool IsDeleted { get; set; } 
-        public bool IsComfirmed { get; set; }
+        public bool IsConfirmed { get; set; }
         public bool IsFrozen { get; set; }
         public Gender Gender { get; set; }  
         public decimal AccountBalance { get; set; }

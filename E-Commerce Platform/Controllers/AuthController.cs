@@ -6,6 +6,9 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
+using Microsoft.EntityFrameworkCore.Infrastructure;
+using E_Commerce_Platform.DataBase.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace E_Commerce_Platform.Controllers
 {
@@ -58,18 +61,46 @@ namespace E_Commerce_Platform.Controllers
 
 
         [HttpPost("register")]
-        public IActionResult Register(UserAddViewModel model)
+        public IActionResult Register(RegisterViewModel model)
         {
-            if (!ModelState.IsValid)
-            {
-                return View(model);
-            }
+            if (!ModelState.IsValid)  return View(model);
+
             if (_dbContext.Users.Any(u => u.Email == model.Email))
             {
-                TempData["ErrorMessage"] = "This email address is already available in the system!!!";
+                ModelState.AddModelError("email", "This email already exists in the system!");
                 return RedirectToAction("ErrorPage", "Auth");
             }
+
+            var user = new User
+            {
+                Name = model.Name,
+                LastName = model.LastName,
+                Email = model.Email,
+                Password = BCrypt.Net.BCrypt.HashPassword(model.Password),
+            };
+
+
             return RedirectToAction("Index", "Home");
+        }
+
+        [HttpGet("verify-account/{token}", Name = "register-account-verification")]
+        public IActionResult VerifyAccount(Guid token)
+        {
+
+            var activation = _dbContext.UserActivations
+                .Include(ua => ua.User)
+                .SingleOrDefault(ua =>
+                    !ua.User.IsConfirmed &&
+                    ua.Token == token &&
+                    ua.ExpireDate > DateTime.UtcNow);
+
+            if (activation == null)
+                return BadRequest("Token not found or already expire");
+
+            activation.User.IsConfirmed = true;
+            _dbContext.SaveChanges();
+
+            return RedirectToAction("login", "auth");
         }
 
 
@@ -135,7 +166,7 @@ namespace E_Commerce_Platform.Controllers
                 return View(model);
             }
 
-            if (!user.IsComfirmed)
+            if (!user.IsConfirmed)
             {
                 ModelState.AddModelError(string.Empty, "Account is not confirmed");
                 return View(model);
