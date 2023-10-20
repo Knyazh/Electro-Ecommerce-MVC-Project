@@ -24,13 +24,40 @@ namespace E_Commerce_Platform.Controllers
         }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         #region Register
-        [HttpGet]
+
+
+        [HttpGet("register")]
         public IActionResult Register()
         {
+            if (_userService.IsCurrentUserAuthenticated())
+            {
+                return RedirectToAction("index", "home");
+            }
+
             return View();
         }
-        [HttpPost]
+
+
+        [HttpPost("register")]
         public IActionResult Register(UserAddViewModel model)
         {
             if (!ModelState.IsValid)
@@ -44,8 +71,38 @@ namespace E_Commerce_Platform.Controllers
             }
             return RedirectToAction("Index", "Home");
         }
-        [HttpGet]
+
+
         #endregion
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         #region Login
 
