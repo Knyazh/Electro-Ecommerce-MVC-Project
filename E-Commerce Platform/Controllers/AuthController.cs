@@ -1,14 +1,12 @@
 ﻿using E_Commerce_Platform.DataBase;
-using E_Commerce_Platform.Services.Abstracts;
-using E_Commerce_Platform.Services.Concretes;
-using E_Commerce_Platform.ViewModels.User;
-using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Mvc;
-using System.Security.Claims;
-using Microsoft.EntityFrameworkCore.Infrastructure;
 using E_Commerce_Platform.DataBase.Models;
+using E_Commerce_Platform.Services.Abstracts;
+using E_Commerce_Platform.ViewModels.User;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 
 namespace E_Commerce_Platform.Controllers
 {
@@ -25,23 +23,6 @@ namespace E_Commerce_Platform.Controllers
             this._userService = userService;
             _userActivationService = userActivationService;
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -63,7 +44,7 @@ namespace E_Commerce_Platform.Controllers
         [HttpPost("register")]
         public IActionResult Register(RegisterViewModel model)
         {
-            if (!ModelState.IsValid)  return View(model);
+            if (!ModelState.IsValid) return View(model);
 
             if (_dbContext.Users.Any(u => u.Email == model.Email))
             {
@@ -105,35 +86,6 @@ namespace E_Commerce_Platform.Controllers
 
 
         #endregion
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
         #region Login
 
@@ -193,6 +145,15 @@ namespace E_Commerce_Platform.Controllers
         #endregion
 
         #region Logout
+
+        [HttpGet]
+        public async Task<IActionResult> Logout()
+        {
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+
+            return RedirectToAction("index", "home");
+        }
+
 
         #endregion
 
