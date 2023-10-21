@@ -4,7 +4,7 @@ using E_Commerce_Platform.Services.Abstracts;
 using E_Commerce_Platform.ViewModels.User;
 using Microsoft.AspNetCore.Mvc;
 
-namespace E_Commerce_Platform.Controllers;
+namespace E_Commerce_Platform.Controllers.User;
 
 [Route("products")]
 

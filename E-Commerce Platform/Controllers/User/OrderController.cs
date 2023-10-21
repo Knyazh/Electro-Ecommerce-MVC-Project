@@ -5,7 +5,7 @@ using E_Commerce_Platform.Services.Abstracts;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace E_Commerce_Platform.Controllers;
+namespace E_Commerce_Platform.Controllers.User;
 
 [Route("order")]
 [Authorize]
@@ -25,7 +25,7 @@ public class OrderController : Controller
        [FromServices] IUserService userService,
        [FromServices] IOrderService orderService,
        [FromServices] IFileService fileService)
-       
+
     {
         var order = new Order
         {
@@ -34,11 +34,11 @@ public class OrderController : Controller
             UserId = userService.CurrentUser.Id,
         };
 
-     
+
         decimal total = 0;
         var orderItems = new List<OrderItem>();
 
-      
+
 
         order.OrderItems = orderItems;
 

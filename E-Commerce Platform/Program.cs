@@ -1,4 +1,5 @@
 using E_Commerce_Platform.DataBase;
+using E_Commerce_Platform.Hubs;
 using E_Commerce_Platform.Services.Abstracts;
 using E_Commerce_Platform.Services.Concretes;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -40,17 +41,14 @@ namespace E_Commerce_Platform
 
 
 
-
-
-
-
-
             var app = builder.Build();
             app.UseStaticFiles();
 
             app.UseAuthentication();
             app.UseAuthorization();
             app.MapControllerRoute("default", "{controller=Home}/{action=Index}");
+
+            app.MapHub<AlertMessageHub>("/alert-hub"); //web-socket endpoint 
             app.Run();
         }
     }

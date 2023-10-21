@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace E_Commerce_Platform.Controllers
+namespace E_Commerce_Platform.Controllers.User
 {
     [Authorize]
     public class EmailController : Controller
@@ -26,7 +26,7 @@ namespace E_Commerce_Platform.Controllers
         {
             return View();
         }
-        [HttpGet]   
+        [HttpGet]
         public IActionResult Trash()
         {
             return View();

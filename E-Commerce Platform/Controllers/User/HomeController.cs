@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace E_Commerce_Platform.Controllers
+namespace E_Commerce_Platform.Controllers.User
 {
     public class HomeController : Controller
     {

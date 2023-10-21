@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 
-namespace E_Commerce_Platform.Controllers
+namespace E_Commerce_Platform.Controllers.User
 {
     public class AuthController : Controller
     {
@@ -20,7 +20,7 @@ namespace E_Commerce_Platform.Controllers
         public AuthController(ECommerceDBContext dbContext, IUserService userService, IUserActivationService userActivationService)
         {
             _dbContext = dbContext;
-            this._userService = userService;
+            _userService = userService;
             _userActivationService = userActivationService;
         }
 

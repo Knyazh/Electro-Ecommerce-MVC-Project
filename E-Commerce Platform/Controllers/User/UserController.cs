@@ -8,16 +8,16 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
-namespace E_Commerce_Platform.Controllers
+namespace E_Commerce_Platform.Controllers.User
 {
     public class UserController : Controller
     {
         public IActionResult Index()
         {
-            return View();  
+            return View();
         }
 
 
-       
+
     }
 }

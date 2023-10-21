@@ -1,10 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace E_Commerce_Platform.Controllers
+namespace E_Commerce_Platform.Controllers.User
 {
     public class AdminController : Controller
     {
-        [HttpGet]   
+        [HttpGet]
         public IActionResult Dashboard()
         {
             return View();
