@@ -5,8 +5,8 @@ namespace E_Commerce_Platform.Services.Abstracts;
 public interface INotificationService
 {
 
-    void CreateAndPushAlerMessage(List<User> recievers, string title, string content);
-    void CreateAndPushAlerMessage(User reciever, string title, string content);
+    void CreateAndPushAlertMessage(List<User> recievers, string title, string content);
+    void CreateAndPushAlertMessage(User reciever, string title, string content);
 
     void SendOrderNotification(Order order);
 

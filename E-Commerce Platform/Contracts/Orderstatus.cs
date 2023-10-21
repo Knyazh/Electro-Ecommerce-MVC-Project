@@ -1,6 +1,6 @@
 ﻿namespace E_Commerce_Platform.Contracts;
 
-public enum Orderstatus
+public enum OrderStatus
 {
     Created = 0,
     Approved = 1,

@@ -88,6 +88,9 @@ namespace E_Commerce_Platform.DataBase
         public DbSet<ProductSize> ProductSizes { get; set; }
         public DbSet<ProductColor> ProductColors { get; set; }  
         public DbSet<UserActivation> UserActivations { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<OrderItem> OrderItems { get; set; }
+        public DbSet<AlertMessage> AlertMessages { get; set; }
 
     }
 }
