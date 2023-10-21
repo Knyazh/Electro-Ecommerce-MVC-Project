@@ -11,7 +11,7 @@ public class Order : BaseEntity<decimal>, IAuditable
 
     public string TrackingCode { get; set; }
 
-    public Orderstatus Status { get; set; }
+    public OrderStatus Status { get; set; }
 
     public DateTime CreatedAt { get; set; }
 
