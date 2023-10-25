@@ -34,11 +34,7 @@ public class OrderController : Controller
             UserId = userService.CurrentUser.Id,
         };
 
-
-        decimal total = 0;
         var orderItems = new List<OrderItem>();
-
-
 
         order.OrderItems = orderItems;
 

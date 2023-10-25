@@ -28,14 +28,16 @@ namespace E_Commerce_Platform
             builder.Services
                .AddDbContext<ECommerceDBContext>(ob =>
                {
-                   var connectionString = "Server=localhost;Port=5432;Database=ECommerceDataBase;User Id=postgres;Password=postgres;";
-                  
-
-                   ob.UseNpgsql(connectionString);
+                   ob.UseNpgsql(builder.Configuration.GetConnectionString("Default"));
                })
                .AddScoped<IVerificationService, VerificationService>()
                .AddScoped<IUserService, UserService>() 
-               .AddScoped<IEmailService, EmailService>()    
+               .AddScoped<IEmailService, EmailService>()
+               .AddScoped<IFileService, FileService>()
+               .AddScoped<INotificationService, NotificationService>()
+               .AddScoped<IOrderService, OrderService>()
+               .AddScoped<IUserActivationService, UserActivationService>()
+               .AddSingleton<IAlertMessageService, AlertMessageService>()
                .AddHttpContextAccessor()
                .AddHttpClient();
 
@@ -48,7 +50,7 @@ namespace E_Commerce_Platform
             app.UseAuthorization();
             app.MapControllerRoute("default", "{controller=Home}/{action=Index}");
 
-            app.MapHub<AlertMessageHub>("/alert-hub"); //web-socket endpoint 
+            //app.MapHub<AlertMessageHub>("/alert-hub"); //web-socket endpoint 
             app.Run();
         }
     }

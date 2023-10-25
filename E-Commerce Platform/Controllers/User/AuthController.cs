@@ -1,5 +1,4 @@
 ﻿using E_Commerce_Platform.DataBase;
-using E_Commerce_Platform.DataBase.Models;
 using E_Commerce_Platform.Services.Abstracts;
 using E_Commerce_Platform.ViewModels.User;
 using Microsoft.AspNetCore.Authentication;
@@ -12,6 +11,7 @@ namespace E_Commerce_Platform.Controllers.User
 {
     public class AuthController : Controller
     {
+
         private readonly ECommerceDBContext _dbContext;
 
         private readonly IUserService _userService;
@@ -52,7 +52,7 @@ namespace E_Commerce_Platform.Controllers.User
                 return RedirectToAction("ErrorPage", "Auth");
             }
 
-            var user = new User
+            var user = new DataBase.Models.User
             {
                 Name = model.Name,
                 LastName = model.LastName,
@@ -63,6 +63,7 @@ namespace E_Commerce_Platform.Controllers.User
 
             return RedirectToAction("Index", "Home");
         }
+
 
         [HttpGet("verify-account/{token}", Name = "register-account-verification")]
         public IActionResult VerifyAccount(Guid token)
