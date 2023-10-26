@@ -1,5 +1,6 @@
 ﻿using E_Commerce_Platform.DataBase;
 using E_Commerce_Platform.Services.Abstracts;
+using E_Commerce_Platform.Services.Concretes;
 using E_Commerce_Platform.ViewModels.User;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -44,6 +45,16 @@ namespace E_Commerce_Platform.Controllers.User
         [HttpPost("register")]
         public IActionResult Register(RegisterViewModel model)
         {
+
+            foreach (var key in ModelState.Keys)
+            {
+                var modelStateEntry = ModelState[key];
+                foreach (var error in modelStateEntry.Errors)
+                {
+                    Console.WriteLine(error.ErrorMessage.ToString());
+                }
+            }
+
             if (!ModelState.IsValid) return View(model);
 
             if (_dbContext.Users.Any(u => u.Email == model.Email))
@@ -56,34 +67,42 @@ namespace E_Commerce_Platform.Controllers.User
             {
                 Name = model.Name,
                 LastName = model.LastName,
+                PIN=model.PIN,
                 Email = model.Email,
+                //PhysicalImageName=model.PhysicalImageName,
+                //DateofBirth = model.DateOfBirth,
                 Password = BCrypt.Net.BCrypt.HashPassword(model.Password),
             };
 
+            _dbContext.Users.Add(user);
+
+            //_userActivationService.CreateAndSendActivationtoken(user);
+
+            _dbContext.SaveChanges();
 
             return RedirectToAction("Index", "Home");
         }
 
 
-        [HttpGet("verify-account/{token}", Name = "register-account-verification")]
-        public IActionResult VerifyAccount(Guid token)
-        {
+        //[HttpGet("verify-account/{token}", Name = "register-account-verification")]
+        //public IActionResult VerifyAccount(Guid token)
+        //{
 
-            var activation = _dbContext.UserActivations
-                .Include(ua => ua.User)
-                .SingleOrDefault(ua =>
-                    !ua.User.IsConfirmed &&
-                    ua.Token == token &&
-                    ua.ExpireDate > DateTime.UtcNow);
+        //    var activation = _dbContext.UserActivations
+        //        .Include(ua => ua.User)
+        //        .SingleOrDefault(ua =>
+        //            !ua.User.IsConfirmed &&
+        //            ua.Token == token &&
+        //            ua.ExpireDate > DateTime.UtcNow);
 
-            if (activation == null)
-                return BadRequest("Token not found or already expire");
+        //    if (activation == null)
+        //        return BadRequest("Token not found or already expire");
 
-            activation.User.IsConfirmed = true;
-            _dbContext.SaveChanges();
+        //    activation.User.IsConfirmed = true;
+        //    _dbContext.SaveChanges();
 
-            return RedirectToAction("login", "auth");
-        }
+        //    return RedirectToAction("login", "auth");
+        //}
 
 
         #endregion
@@ -119,11 +138,11 @@ namespace E_Commerce_Platform.Controllers.User
                 return View(model);
             }
 
-            if (!user.IsConfirmed)
-            {
-                ModelState.AddModelError(string.Empty, "Account is not confirmed");
-                return View(model);
-            }
+            //if (!user.IsConfirmed)
+            //{
+            //    ModelState.AddModelError(string.Empty, "Account is not confirmed");
+            //    return View(model);
+            //}
 
 
             var claim = new List<Claim>

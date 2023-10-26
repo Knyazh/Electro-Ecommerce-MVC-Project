@@ -37,9 +37,9 @@ public class NotificationService : INotificationService
     {
         switch (order.Status)
         {
-            case OrderStatus.Created:
-                SendOrderCreatedNotification(order);
-                break;
+            //case OrderStatus.Created:
+            //    SendOrderCreatedNotification(order);
+            //    break;
             case OrderStatus.Approved:
                 SendOrderApprovedNotification(order);
                 break;
@@ -123,12 +123,12 @@ public class NotificationService : INotificationService
     #endregion
 
 
-    public void SendOrderCreatedNotification(Order order)
-    {
-        var emailMessageContent = PrepareAlertMessageContent(order, AlertMessageTemplates.Order.CREATED);
-        var staffMembers = _userService.GetAllStaffMembers();
-        CreateAndPustOrderAlertMessage(staffMembers, emailMessageContent);
-    }
+    //public void SendOrderCreatedNotification(Order order)
+    //{
+    //    var emailMessageContent = PrepareAlertMessageContent(order, AlertMessageTemplates.Order.CREATED);
+    //    var staffMembers = _userService.GetAllStaffMembers();
+    //    CreateAndPustOrderAlertMessage(staffMembers, emailMessageContent);
+    //}
     public void SendOrderApprovedNotification(Order order)
     {
         var emailMessageContent = PrepareEmailMessageContent(order, EmailTemplates.Order.APPROVED);

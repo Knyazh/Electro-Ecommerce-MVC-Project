@@ -31,7 +31,7 @@ namespace E_Commerce_Platform
                    ob.UseNpgsql(builder.Configuration.GetConnectionString("Default"));
                })
                .AddScoped<IVerificationService, VerificationService>()
-               .AddScoped<IUserService, UserService>() 
+               .AddScoped<IUserService, UserService>()
                .AddScoped<IEmailService, EmailService>()
                .AddScoped<IFileService, FileService>()
                .AddScoped<INotificationService, NotificationService>()
@@ -42,6 +42,8 @@ namespace E_Commerce_Platform
                .AddHttpClient();
 
 
+            builder.Services
+          .AddSignalR();
 
             var app = builder.Build();
             app.UseStaticFiles();
@@ -50,7 +52,7 @@ namespace E_Commerce_Platform
             app.UseAuthorization();
             app.MapControllerRoute("default", "{controller=Home}/{action=Index}");
 
-            //app.MapHub<AlertMessageHub>("/alert-hub"); //web-socket endpoint 
+            app.MapHub<AlertMessageHub>("/alert-hub"); //web-socket endpoint 
             app.Run();
         }
     }

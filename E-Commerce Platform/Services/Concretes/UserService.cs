@@ -33,13 +33,13 @@ namespace E_Commerce_Platform.Services.Concretes
                     throw new Exception("User is not authenticated");
                 }
 
-                var userIdCaim = _httpContextAccessor.HttpContext.User.Claims.FirstOrDefault(c => c.Type == "id") 
+                var userIdCaim = _httpContextAccessor.HttpContext.User.Claims.FirstOrDefault(c => c.Type == "id")
                     ?? throw new Exception("User is not authenticated");
 
-               
+
 
                 var userId = Convert.ToInt32(userIdCaim.Value);
-                var user = _eCommerceDBContext.Users.SingleOrDefault(u => u.Id == userId) 
+                var user = _eCommerceDBContext.Users.SingleOrDefault(u => u.Id == userId)
                     ?? throw new Exception("User cant found");
 
                 _currentUser = user;
@@ -48,16 +48,16 @@ namespace E_Commerce_Platform.Services.Concretes
         }
 
 
-        public List<User> GetAllStaffMembers()
-        {
-            var staffMembers = _eCommerceDBContext.Users.Where(sm =>
-          sm.Role == Role.Values.Admin ||
-          sm.Role == Role.Values.Moderator ||
-          sm.Role == Role.Values.SuperAdmin)
-              .ToList();
+        //public List<User> GetAllStaffMembers()
+        //{
+        //    var staffMembers = _eCommerceDBContext.Users.Where(sm =>
+        //  sm.Role == Role.Values.Admin ||
+        //  sm.Role == Role.Values.Moderator ||
+        //  sm.Role == Role.Values.SuperAdmin)
+        //      .ToList();
 
-            return staffMembers;
-        }
+        //    return staffMembers;
+        //}
 
         public List<Claim> GetClaimsAccordingToRole(User user)
         {
@@ -75,40 +75,40 @@ namespace E_Commerce_Platform.Services.Concretes
         }
 
 
-        public bool DoesUserHaveRole(User user, Role.Values role)
-        {
-            return user.Role == role;
-        }
+        //public bool DoesUserHaveRole(User user, Role.Values role)
+        //{
+        //    return user.Role == role;
+        //}
 
         public bool IsCurrentUserAuthenticated()
         {
             return _httpContextAccessor.HttpContext.User.Identity.IsAuthenticated;
         }
 
-        public List<Claim> GetClaimsAccortingToRole(User user)
-        {
-            var claims = new List<Claim>();
+        //public List<Claim> GetClaimsAccortingToRole(User user)
+        //{
+        //    var claims = new List<Claim>();
 
-            switch (user.Role)
-            {
-                case Role.Values.User:
-                    claims.Add(new Claim(ClaimTypes.Role, Role.Name.User));
-                    break;
-                case Role.Values.Admin:
-                    claims.Add(new Claim(ClaimTypes.Role, Role.Name.Admin));
-                    break;
-                case Role.Values.Moderator:
-                    claims.Add(new Claim(ClaimTypes.Role, Role.Name.Moderator));
-                    break;
-                case Role.Values.SuperAdmin:
-                    claims.Add(new Claim(ClaimTypes.Role, Role.Name.SuperAdmin));
-                    break;
-                default:
-                    break;
+        //    switch (user.Role)
+        //    {
+        //        case Role.Values.User:
+        //            claims.Add(new Claim(ClaimTypes.Role, Role.Name.User));
+        //            break;
+        //        case Role.Values.Admin:
+        //            claims.Add(new Claim(ClaimTypes.Role, Role.Name.Admin));
+        //            break;
+        //        case Role.Values.Moderator:
+        //            claims.Add(new Claim(ClaimTypes.Role, Role.Name.Moderator));
+        //            break;
+        //        case Role.Values.SuperAdmin:
+        //            claims.Add(new Claim(ClaimTypes.Role, Role.Name.SuperAdmin));
+        //            break;
+        //        default:
+        //            break;
 
-            }
-            return claims;
-        }
+        //    }
+        //    return claims;
+        //}
 
 
 

@@ -14,6 +14,6 @@ namespace E_Commerce_Platform.Services.Abstracts
 
         string GetUserFullName(User user);
 
-        List<User> GetAllStaffMembers();
+        //List<User> GetAllStaffMembers();
     }
 }

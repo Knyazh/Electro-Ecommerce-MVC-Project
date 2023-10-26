@@ -1,5 +1,5 @@
 ﻿@using E_Commerce_Platform.ViewModels.User;
-@model UserAddViewModel
+@model RegisterViewModel
 <!DOCTYPE html>
 <html>
 <head>
@@ -59,9 +59,9 @@
 
             <!-- Surname Input -->
             <div class="form-group">
-                <label for="Surname">Surname</label>
-                <input type="text" class="form-control" id="Surname" asp-for="Surname" name="Surname" required>
-                <span asp-validation-for="Surname" class="text-danger"></span>
+                <label for="Lastname">Lastname</label>
+                <input type="text" class="form-control" id="Surname" asp-for="LastName" name="Lastname" required>
+                <span asp-validation-for="LastName" class="text-danger"></span>
                 <div style="color:red" class="invalid-feedback">Surname is required.</div>
             </div>
 
@@ -75,9 +75,18 @@
 
             <!-- Email Password Input -->
             <div class="form-group">
-                <label for="EmailPassword">Email Password</label>
-                <input type="password" class="form-control" id="EmailPassword" asp-for="EmailPassword" name="EmailPassword" required>
-                <span asp-validation-for="EmailPassword" class="text-danger"></span>
+                <label for="Password">Email Password</label>
+                <input type="password" class="form-control" id="EmailPassword" asp-for="Password" name="Password" required>
+                <span asp-validation-for="Password" class="text-danger"></span>
+                <div style="color:red" class="invalid-feedback">Email password is required.</div>
+            </div>
+
+
+            <!--  Cnfirm Email Password Input -->
+            <div class="form-group">
+                <label for="Password"> Confirm Email Password</label>
+                <input type="password" class="form-control" id="EmailPassword" asp-for="ConfirmPassword" name="ConfirmPassword" required>
+                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
                 <div style="color:red" class="invalid-feedback">Email password is required.</div>
             </div>
 
@@ -90,15 +99,15 @@
             </div>
 
             <!-- Date of Birth Input -->
-            <div class="form-group">
+          @*   <div class="form-group">
                 <label for="DateofBirth">Date of Birth</label>
-                <input type="date" class="form-control" id="DateofBirth" asp-for="DateofBirth" name="DateofBirth" required>
-                <span asp-validation-for="DateofBirth" class="text-danger"></span>
+                <input type="date" class="form-control" id="DateofBirth" asp-for="DateOfBirth" name="DateofBirth" required>
+                <span asp-validation-for="DateOfBirth" class="text-danger"></span>
                 <div style="color:red" class="invalid-feedback">Date of Birth is required.</div>
-            </div>
+            </div> *@
 
             <!-- Gender Input -->
-            <div class="form-group">
+           @*  <div class="form-group">
                 <label for="Gender">Gender</label>
                 <select class="form-control" id="Gender" asp-for="Gender" name="Gender" required>
                     <option value="Male">Male</option>
@@ -107,22 +116,22 @@
                 <span asp-validation-for="Gender" class="text-danger"></span>
                 <div style="color:red" class="invalid-feedback">Gender is required.</div>
             </div>
-
+ *@
             <!-- Account Balance Input -->
-            <div class="form-group">
+           @*  <div class="form-group">
                 <label for="AccountBalance">Account Balance</label>
                 <input type="number" class="form-control" id="AccountBalance" asp-for="AccountBalance" name="AccountBalance" required min="0">
                 <span asp-validation-for="AccountBalance" class="text-danger"></span>
                 <div style="color:red" class="invalid-feedback">Account balance is required and must be a non-negative number.</div>
-            </div>
+            </div> *@
 
             <!-- Physical Image Name Input -->
-            <div class="form-group">
+           @*  <div class="form-group">
                 <label for="PhysicalImageName">Physical Image Name</label>
                 <input type="file" class="form-control" id="PhysicalImageName" asp-for="PhysicalImageName" name="PhysicalImageName" required>
                 <span asp-validation-for="PhysicalImageName" class="text-danger"></span>
                 <div style="color:red" class="invalid-feedback">Physical image name is required.</div>
-            </div>
+            </div> *@
 
             <!-- Save and Back Buttons -->
             <div class="form-group text-center">
