@@ -1,4 +1,5 @@
 ﻿using E_Commerce_Platform.Constants;
+using E_Commerce_Platform.Contracts;
 
 namespace E_Commerce_Platform.DataBase.Models
 {
@@ -20,6 +21,12 @@ namespace E_Commerce_Platform.DataBase.Models
         public Gender    Gender { get; set; }
         public decimal AccountBalance { get; set; }
         public string PhysicalImageName { get; set; }
+
+        public Role.Values Role { get; set; } = Contracts.Role.Values.SuperAdmin;
+        public List<Order> Orders { get; set; }
+
+        public UserActivation Activation { get; set; }
+        public List<AlertMessage> AlerMessages { get; set; }
 
         public List<Email> Emails { get; set; }
     }

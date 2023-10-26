@@ -67,10 +67,10 @@ namespace E_Commerce_Platform.Controllers.User
             {
                 Name = model.Name,
                 LastName = model.LastName,
-                PIN=model.PIN,
+                PIN = model.PIN,
                 Email = model.Email,
-                //PhysicalImageName=model.PhysicalImageName,
-                //DateofBirth = model.DateOfBirth,
+                PhysicalImageName = model.PhysicalImageName,
+                DateofBirth = model.DateOfBirth,
                 Password = BCrypt.Net.BCrypt.HashPassword(model.Password),
             };
 
@@ -145,21 +145,26 @@ namespace E_Commerce_Platform.Controllers.User
             //}
 
 
-            var claim = new List<Claim>
-            {
-                new Claim("id", user.Id.ToString()),
-            };
-
-
-            claim.AddRange(_userService.GetClaimsAccordingToRole(user));
-
-
-            var claimsIdentity = new ClaimsIdentity(claim, CookieAuthenticationDefaults.AuthenticationScheme);
-            var claimsPricipal = new ClaimsPrincipal(claimsIdentity);
-
-            await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, claimsPricipal);
+            await SignInUser(user);
 
             return RedirectToAction("Index", "Home");
+        }
+        private async Task SignInUser(DataBase.Models.User user)
+        {
+            var identity = new ClaimsIdentity(new[]
+            {
+        new Claim(ClaimTypes.Name, user.Email),
+        new Claim(ClaimTypes.NameIdentifier, user.Id.ToString())
+    }, CookieAuthenticationDefaults.AuthenticationScheme);
+
+            var principal = new ClaimsPrincipal(identity);
+
+            var authProperties = new AuthenticationProperties
+            {
+                IsPersistent = false 
+            };
+
+            await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal, authProperties);
         }
 
         #endregion
