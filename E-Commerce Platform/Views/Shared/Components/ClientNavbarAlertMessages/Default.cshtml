@@ -1,0 +1,34 @@
+﻿@using E_Commerce_Platform.ViewModels.User;
+
+@model List<AlertMessageViewModel>
+<button class="btn btn-link dropdown-toggle ht-btn"
+        type="button"
+        id="alert-messages-btn"
+        data-bs-toggle="dropdown"
+        aria-label="alert-message"
+        aria-expanded="false">
+    <i class="pe-7s-bell"></i>
+</button>
+<ul class="dropdown-menu" id="alert-messages-box" style="overflow: scroll; max-height:400px">
+
+    @foreach (var alertMessage in Model)
+    {
+        <li>
+            <!-- item-->
+            <a href="#" class="dropdown-item py-3">
+                <small class="float-end text-muted ps-2">@alertMessage.CreatedAt.ToString("d")</small>
+                <div class="media">
+                    <div class="avatar-md bg-soft-primary">
+                        <i class="ti ti-chart-arcs"></i>
+                    </div>
+                    <div class="media-body align-self-center ms-2 text-truncate">
+                        <h6 class="my-0 fw-normal text-dark">@alertMessage.Title</h6>
+                        <small class="text-muted mb-0">@alertMessage.Content</small>
+                    </div><!--end media-body-->
+                </div><!--end media-->
+            </a>
+            <!--end-item-->
+        </li>
+    }
+
+</ul>

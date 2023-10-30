@@ -143,13 +143,21 @@
                         <input placeholder="Password" type="password" name="Password" asp-for="Password" id="Password">
                     </div>
                     <div class="button-group">
-                        <a asp-controller="Home" asp-action="Index" class="button" id="submit">Back</a>
+                        @* <a asp-controller="Home" asp-action="Index" class="button" id="submit">Back</a> *@
+                        <button style="background-color:green" type="button" class="btn btn-secondary" onclick="goBack()">Back</button>
                         <button type="submit" id="back">Login</button>
                     </div>
                 </form>
             </div>
         </div>
     </main>
+    <script>
 
+
+        // Back button functionality
+        function goBack() {
+            window.history.back();
+        }
+    </script>
 </body>
 </html>

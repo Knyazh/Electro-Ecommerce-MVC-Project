@@ -138,34 +138,42 @@ namespace E_Commerce_Platform.Controllers.User
                 return View(model);
             }
 
+            var claims = new List<Claim>
+        {
+            new Claim("id", user.Id.ToString()),
+        };
+
+            claims.AddRange(_userService.GetClaimsAccordingToRole(user));
+
+            var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+            var claimsPricipal = new ClaimsPrincipal(claimsIdentity);
+
+            await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, claimsPricipal);
+
             //if (!user.IsConfirmed)
             //{
             //    ModelState.AddModelError(string.Empty, "Account is not confirmed");
             //    return View(model);
             //}
 
-
-            await SignInUser(user);
-
             return RedirectToAction("Index", "Home");
         }
-        private async Task SignInUser(DataBase.Models.User user)
-        {
-            var identity = new ClaimsIdentity(new[]
-            {
-        new Claim(ClaimTypes.Name, user.Email),
-        new Claim(ClaimTypes.NameIdentifier, user.Id.ToString())
-    }, CookieAuthenticationDefaults.AuthenticationScheme);
+        //    private async Task SignInUser(DataBase.Models.User user)
+        //    {
+        //        var identity = new ClaimsIdentity(new[]
+        //        {
+        //    new Claim(ClaimTypes.NameIdentifier, user.Id.ToString())
+        //},  CookieAuthenticationDefaults.AuthenticationScheme);
 
-            var principal = new ClaimsPrincipal(identity);
+        //        var principal = new ClaimsPrincipal(identity);
 
-            var authProperties = new AuthenticationProperties
-            {
-                IsPersistent = false 
-            };
+        //        var authProperties = new AuthenticationProperties
+        //        {
+        //            IsPersistent = false 
+        //        };
 
-            await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal, authProperties);
-        }
+        //        await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal, authProperties);
+        //    }
 
         #endregion
 
